@@ -5,21 +5,42 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
     <script>
+        var url = "https://jsonplaceholder.typicode.com/todos";
+        function getTodo(){
+            var item = $("#item").val();
+            var todo = $("#todo");
+            //alert(item);
+            $.getJSON(url + '/' + item, function(data){
+                todo.html("");
+                todo.append('<h3>' + data.title + '</h3>');
+                todo.append('<h4>' + data.completed + '</h4>');
+                todo.append('<h5>UserID' + data.userId + '</h5>');
+            });
+        }
+
         $(function() {
             var todoList = $("#todoList");
             //todoList.html("<h1>Message</h1>");
             //the todos list will be placed into the variable data:
-            var url = "https://jsonplaceholder.typicode.com/todos";
+            
             $.getJSON(url, function(data) {
-                console.log(data);
+                //console.log(data);
+                todoList.append("<h1>List!</h1>");
+                for(var i=0;i<data.length;i++){
+                    //todoList.append("<li>"+ data[i].title +"</li>");
+                    todoList.append('<li id="todo'+ data[i].id + '">' + data[i].title + '</li>');
+                }
             });
         });
     </script>
 </head>
 
 <body>
-    <ul id="todoList">
-    </ul>
+    <input id="item" type='text' placeholder='Todo Number'>
+    <input type='button' value="Pick" onclick="getTodo()">
+    <div id="todo"></div>
+    <ol id="todoList">
+    </ol>
 </body>
 
 </html>

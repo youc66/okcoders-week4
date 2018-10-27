@@ -6,11 +6,10 @@
 
     <script>
         var url = "https://jsonplaceholder.typicode.com/todos";
-        function getTodo(){
+        function getTodo() {
             var item = $("#item").val();
             var todo = $("#todo");
-            //alert(item);
-            $.getJSON(url + '/' + item, function(data){
+            $.getJSON(url + '/' + item, function (data) {
                 todo.html("");
                 todo.append('<h3>' + data.title + '</h3>');
                 todo.append('<h4>' + data.completed + '</h4>');
@@ -18,20 +17,27 @@
             });
         }
 
-        $(function() {
+        $(function () {
             var todoList = $("#todoList");
             //todoList.html("<h1>Message</h1>");
             //the todos list will be placed into the variable data:
-            
-            $.getJSON(url, function(data) {
+
+            $.getJSON(url, function (data) {
                 //console.log(data);
                 todoList.append("<h1>List!</h1>");
-                for(var i=0;i<data.length;i++){
+                for (var i = 0; i < data.length; i++) {
                     //todoList.append("<li>"+ data[i].title +"</li>");
-                    todoList.append('<li id="todo'+ data[i].id + '">' + data[i].title + '</li>');
+                    todoList.append('<li id="todo' + data[i].id + '">' + data[i].title + '</li>');
+
+                    if (data[i].completed) {
+                        $('#todo' + data[i].id).css('color', 'green');
+                    } else {
+                        $('#todo' + data[i].id).css('color', 'red');
+                    }
                 }
             });
         });
+
     </script>
 </head>
 

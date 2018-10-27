@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Getting all the things...</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script>
+        $(function() {
+            var todoList = $("#todoList");
+            //todoList.html("<h1>Message</h1>");
+            //the todos list will be placed into the variable data:
+            var url = "https://jsonplaceholder.typicode.com/todos";
+            $.getJSON(url, function(data) {
+                console.log(data);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <ul id="todoList">
+    </ul>
+</body>
+
+</html>
